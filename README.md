@@ -188,7 +188,7 @@ If you use this package in your research, please cite:
 @software{fast_table_detect,
   title = {Fast Table Detect: Efficient Table Detection in Images},
   author = {Samuel Diop},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/Slownite/fast-table-detect}
 }
 ```
