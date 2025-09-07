@@ -2,20 +2,13 @@ import numpy as np
 import cv2 as cv
 from collections import deque
 from typing import List, Tuple
-
+from .preprocess import _box1d
 # ---------------- helpers ----------------
 
 def _ensure_odd(k: int, lo: int = 3) -> int:
     k = max(lo, int(k))
     return k if (k % 2 == 1) else (k + 1)
 
-def _box1d(x: np.ndarray, k: int) -> np.ndarray:
-    if k <= 1:
-        return x.astype(np.float32)
-    pad = k // 2
-    xp = np.pad(x.astype(np.float32), (pad, pad), mode='reflect')
-    ker = np.ones(k, dtype=np.float32) / float(k)
-    return np.convolve(xp, ker, mode='valid')
 
 def _rolling_max_deque(x: np.ndarray, win: int) -> np.ndarray:
     n = x.size

@@ -54,6 +54,14 @@ def _projection(img, axis, y0=None, y1=None, x0=None, x1=None):
     return roi.sum(axis=axis).astype(np.float32)
 
 
+def _box1d(x: np.ndarray, k: int) -> np.ndarray:
+    if k <= 1:
+        return x.astype(np.float32)
+    pad = k // 2
+    xp = np.pad(x.astype(np.float32), (pad, pad), mode='reflect')
+    ker = np.ones(k, dtype=np.float32) / float(k)
+    return np.convolve(xp, ker, mode='valid')
+
 def _angle_scan_score(ink_small, angles, smooth_k=31):
     """
     For each angle, rotate and compute row-ink projection variance.
